@@ -35,6 +35,11 @@ public class PersonalPattern {
     private Integer validity = 365;
 
     /**
+     * 身份证号码
+     */
+    private String identityCode;
+
+    /**
      * 密钥长度
      */
     private Integer keysize = 2048;
@@ -43,6 +48,11 @@ public class PersonalPattern {
      * 私钥密码
      */
     private String keypass;
+
+    /**
+     * 完整的名字
+     */
+    private String name;
 
     /**
      * 密钥对拥有者名字
@@ -80,6 +90,15 @@ public class PersonalPattern {
      */
     private String country;
 
+    /**
+     * 性别
+     */
+    private String sex;
+
+    /**
+     * name_identityCode_sex_country_province_city
+     * @param line
+     */
     public static PersonalPattern parse(String line) {
         PersonalPattern personalPattern = new PersonalPattern();
         String[] items = line.split("[\\s_]+");
@@ -88,13 +107,37 @@ public class PersonalPattern {
             return null;
         }
 
-        
-
-//        orderpattern.savePath = items[0];
-//        orderpattern.fileName = items[1];
-//        orderpattern.type = items[2];
-//        orderpattern.size = Long.parseLong(items[3]);
+        personalPattern.setName(items[0]);
+        personalPattern.setIdentityCode(items[1]);
+        personalPattern.setSex(items[2]);
+        personalPattern.setCountry(items[3]);
+        personalPattern.setProvince(items[4]);
+        personalPattern.setCity(items[5]);
         return personalPattern;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getIdentityCode() {
+        return identityCode;
+    }
+
+    public void setIdentityCode(String identityCode) {
+        this.identityCode = identityCode;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAlias() {
