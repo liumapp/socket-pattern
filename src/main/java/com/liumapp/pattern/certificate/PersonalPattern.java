@@ -1,5 +1,7 @@
 package com.liumapp.pattern.certificate;
 
+import com.liumapp.pattern.exception.PatternPropertiesNumberNotEnough;
+
 /**
  * Created by liumapp on 11/20/17.
  * E-mail:liumapp.com@gmail.com
@@ -99,12 +101,12 @@ public class PersonalPattern {
      * name_identityCode_sex_country_province_city
      * @param line
      */
-    public static PersonalPattern parse(String line) {
+    public static PersonalPattern parse(String line) throws PatternPropertiesNumberNotEnough {
         PersonalPattern personalPattern = new PersonalPattern();
         String[] items = line.split("[\\s_]+");
 
-        if (items.length < 4) {
-            return null;
+        if (items.length < 6) {
+            throw new PatternPropertiesNumberNotEnough("properties number lt 6");
         }
 
         personalPattern.setName(items[0]);
