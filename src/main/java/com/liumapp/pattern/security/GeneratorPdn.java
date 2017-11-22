@@ -8,6 +8,9 @@ package com.liumapp.pattern.security;
  */
 public class GeneratorPdn {
 
+    /**
+     * generator需要的密码
+     */
     public String generatorPd;
 
     public String getGeneratorPd() {
