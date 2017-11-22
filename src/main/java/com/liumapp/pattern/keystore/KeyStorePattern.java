@@ -2,6 +2,7 @@ package com.liumapp.pattern.keystore;
 
 import com.liumapp.pattern.certificate.PersonalPattern;
 import com.liumapp.pattern.exception.PatternPropertiesNumberNotEnough;
+import com.liumapp.pattern.exception.WrongType;
 import com.liumapp.pattern.security.GeneratorPdn;
 
 /**
@@ -45,17 +46,36 @@ public class KeyStorePattern extends GeneratorPdn {
 
     private String fcPassword;
 
+    public String getType() {
+        return type;
+    }
+
     /**
-     *
-     * @param line
+     * keyStore_generatorPd_liumapp.ks_keyStorePd_2048_/usr/local/data/keystore_country_province_city_alias_certPd
+     * @param line order line
      */
-    public static KeyStorePattern parse(String line) throws PatternPropertiesNumberNotEnough {
+    public static KeyStorePattern parse(String line) throws PatternPropertiesNumberNotEnough , WrongType {
         KeyStorePattern keyStorePattern = new KeyStorePattern();
         String[] items = line.split("[\\s_]]+");
 
         if (items.length < 6) {
             throw new PatternPropertiesNumberNotEnough();
         }
+
+        if (!items[0].equals(keyStorePattern.getType())) {
+            throw new WrongType();
+        }
+
+        keyStorePattern.setGeneratorPd(items[1]);
+        keyStorePattern.setKeyStoreName(items[2]);
+        keyStorePattern.setKeyStorePd(items[3]);
+        keyStorePattern.setKeyLength(Integer.getInteger(items[4]));
+        keyStorePattern.setSavePath(items[5]);
+        keyStorePattern.setFcCountry(items[6]);
+        keyStorePattern.setFcProvince(items[7]);
+        keyStorePattern.setFcCity(items[8]);
+        keyStorePattern.setFcAlias(items[9]);
+        keyStorePattern.setFcPassword(items[10]);
 
         return keyStorePattern;
     }
