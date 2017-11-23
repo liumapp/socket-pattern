@@ -1,7 +1,5 @@
 package com.liumapp.pattern.keystore;
 
-import com.liumapp.pattern.SocketPattern;
-import com.liumapp.pattern.certificate.PersonalPattern;
 import com.liumapp.pattern.exception.PatternPropertiesNumberNotEnough;
 import com.liumapp.pattern.exception.WrongType;
 import com.liumapp.pattern.security.GeneratorPdn;
@@ -11,7 +9,7 @@ import com.liumapp.pattern.security.GeneratorPdn;
  * E-mail:liumapp.com@gmail.com
  * home-page:http://www.liumapp.com
  */
-public class KeyStorePattern extends SocketPattern implements GeneratorPdn {
+public class KeyStorePattern  implements GeneratorPdn {
 
     private String type = "keyStore";
 

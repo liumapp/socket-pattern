@@ -1,6 +1,5 @@
 package com.liumapp.pattern.security;
 
-import com.liumapp.pattern.SocketPattern;
 
 /**
  * generator password needed
