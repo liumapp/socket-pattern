@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class PersonalPattern {
 
-    private String type = "personalCert";
+    private String type = "generatePersonalCert";
 
     /**
      * 别名
@@ -107,6 +107,7 @@ public class PersonalPattern {
 
     /**
      * type_keystoreName_keystorePd_alias_certPd_name_identityCode_sex_country_province_city
+     * keysize 默认为2048 暂时不能修改
      * @param line
      */
     public static PersonalPattern parse(String line) throws PatternPropertiesNumberNotEnough, WrongType {

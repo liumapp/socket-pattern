@@ -4,7 +4,7 @@
 
   <groupId>com.liumapp.pattern</groupId>
   <artifactId>socket-pattern</artifactId>
-  <version>v1.0.0-SNAPSHOT</version>
+  <version>v1.0.0</version>
   <packaging>jar</packaging>
 
   <parent>
@@ -15,11 +15,13 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.8</java.version>
+    <springboot.version>1.5.6.RELEASE</springboot.version>
   </properties>
 
   <name>socket-pattern</name>
   <url>http://maven.apache.org</url>
-  <description>从多个使用了socket的项目中，剥离pattern并独立立项，方便多个项目之间的共用。</description>
+  <description>separate patterns from multy project.</description>
 
   <build>
     <plugins>
