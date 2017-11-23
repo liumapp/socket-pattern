@@ -14,14 +14,15 @@ public class PersonalPattern {
 
     private String type = "personalCert";
 
-    private String keyStore;
-
     /**
      * 别名
      */
     private String alias;
 
-    private String savepath;
+    /**
+     * 个人证书密码
+     */
+    private String certPassword;
 
     /**
      * 密钥库名称
@@ -105,7 +106,7 @@ public class PersonalPattern {
     private String sex;
 
     /**
-     * type_keystoreName_alias_name_identityCode_sex_country_province_city
+     * type_keystoreName_keystorePd_alias_certPd_name_identityCode_sex_country_province_city
      * @param line
      */
     public static PersonalPattern parse(String line) throws PatternPropertiesNumberNotEnough, WrongType {
@@ -115,16 +116,18 @@ public class PersonalPattern {
         List<String> tmp = Arrays.asList(items);
         LinkedList<String> lists = new LinkedList<String>(tmp);
 
-        if (lists.size() < 9) {
+        if (lists.size() < 11) {
             throw new PatternPropertiesNumberNotEnough();
         }
 
-        if (!lists.pop().equals(personalPattern.type)) {
+        if (!lists.pop().equals(personalPattern.getType())) {
             throw new WrongType();
         }
 
         personalPattern.setKeystore(lists.pop());
+        personalPattern.setStorepass(lists.pop());
         personalPattern.setAlias(lists.pop());
+        personalPattern.setCertPassword(lists.pop());
         personalPattern.setName(lists.pop());
         personalPattern.setIdentityCode(lists.pop());
         personalPattern.setSex(lists.pop());
@@ -133,6 +136,22 @@ public class PersonalPattern {
         personalPattern.setCity(lists.pop());
 
         return personalPattern;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getCertPassword() {
+        return certPassword;
+    }
+
+    public void setCertPassword(String certPassword) {
+        this.certPassword = certPassword;
     }
 
     public String getSex() {
@@ -165,14 +184,6 @@ public class PersonalPattern {
 
     public void setAlias(String alias) {
         this.alias = alias;
-    }
-
-    public String getSavepath() {
-        return savepath;
-    }
-
-    public void setSavepath(String savepath) {
-        this.savepath = savepath;
     }
 
     public String getKeystore() {
