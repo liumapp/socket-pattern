@@ -13,8 +13,6 @@ public class KeyStorePattern  implements GeneratorPdn {
 
     private String type = "keyStore";
 
-    private String savePath;
-
     private String keyStoreName;
 
     private String generatorPd;
@@ -52,7 +50,8 @@ public class KeyStorePattern  implements GeneratorPdn {
     }
 
     /**
-     * keyStore_generatorPd_liumapp.ks_keyStorePd_2048_/usr/local/data/keystore_country_province_city_alias_certPd
+     * 为保证alias的唯一性，alias建议使用身份证号码做标识
+     * keyStore_generatorPd_liumapp.ks_keyStorePd_2048_country_province_city_alias_certPd_fcName
      * @param line order line
      */
     public static KeyStorePattern parse(String line) throws PatternPropertiesNumberNotEnough , WrongType {
@@ -71,22 +70,14 @@ public class KeyStorePattern  implements GeneratorPdn {
         keyStorePattern.setKeyStoreName(items[2]);
         keyStorePattern.setKeyStorePd(items[3]);
         keyStorePattern.setKeyLength(Integer.getInteger(items[4]));
-        keyStorePattern.setSavePath(items[5]);
-        keyStorePattern.setFcCountry(items[6]);
-        keyStorePattern.setFcProvince(items[7]);
-        keyStorePattern.setFcCity(items[8]);
-        keyStorePattern.setFcAlias(items[9]);
-        keyStorePattern.setFcPassword(items[10]);
+        keyStorePattern.setFcCountry(items[5]);
+        keyStorePattern.setFcProvince(items[6]);
+        keyStorePattern.setFcCity(items[7]);
+        keyStorePattern.setFcAlias(items[8]);
+        keyStorePattern.setFcPassword(items[9]);
+        keyStorePattern.setFcName(items[10]);
 
         return keyStorePattern;
-    }
-
-    public String getSavePath() {
-        return savePath;
-    }
-
-    public void setSavePath(String savePath) {
-        this.savePath = savePath;
     }
 
     public String getKeyStoreName() {

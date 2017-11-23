@@ -9,6 +9,10 @@ import com.liumapp.pattern.exception.PatternPropertiesNumberNotEnough;
  */
 public class PersonalPattern {
 
+    private String type = "personalCert";
+
+    private String keyStore;
+
     /**
      * 别名
      */
