@@ -1,6 +1,9 @@
 package com.liumapp.pattern.certificate;
 
 import com.liumapp.pattern.exception.PatternPropertiesNumberNotEnough;
+import com.liumapp.pattern.exception.WrongType;
+
+import java.util.*;
 
 /**
  * Created by liumapp on 11/20/17.
@@ -102,23 +105,33 @@ public class PersonalPattern {
     private String sex;
 
     /**
-     * name_identityCode_sex_country_province_city
+     * type_keystoreName_alias_name_identityCode_sex_country_province_city
      * @param line
      */
-    public static PersonalPattern parse(String line) throws PatternPropertiesNumberNotEnough {
+    public static PersonalPattern parse(String line) throws PatternPropertiesNumberNotEnough, WrongType {
         PersonalPattern personalPattern = new PersonalPattern();
         String[] items = line.split("[\\s_]+");
 
-        if (items.length < 6) {
-            throw new PatternPropertiesNumberNotEnough("properties number lt 6");
+        List<String> tmp = Arrays.asList(items);
+        LinkedList<String> lists = new LinkedList<String>(tmp);
+
+        if (lists.size() < 9) {
+            throw new PatternPropertiesNumberNotEnough();
         }
 
-        personalPattern.setName(items[0]);
-        personalPattern.setIdentityCode(items[1]);
-        personalPattern.setSex(items[2]);
-        personalPattern.setCountry(items[3]);
-        personalPattern.setProvince(items[4]);
-        personalPattern.setCity(items[5]);
+        if (!lists.pop().equals(personalPattern.type)) {
+            throw new WrongType();
+        }
+
+        personalPattern.setKeystore(lists.pop());
+        personalPattern.setAlias(lists.pop());
+        personalPattern.setName(lists.pop());
+        personalPattern.setIdentityCode(lists.pop());
+        personalPattern.setSex(lists.pop());
+        personalPattern.setCountry(lists.pop());
+        personalPattern.setProvince(lists.pop());
+        personalPattern.setCity(lists.pop());
+
         return personalPattern;
     }
 

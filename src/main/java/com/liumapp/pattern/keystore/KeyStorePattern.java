@@ -4,6 +4,11 @@ import com.liumapp.pattern.exception.PatternPropertiesNumberNotEnough;
 import com.liumapp.pattern.exception.WrongType;
 import com.liumapp.pattern.security.GeneratorPdn;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created by liumapp on 11/21/17.
  * E-mail:liumapp.com@gmail.com
@@ -58,24 +63,27 @@ public class KeyStorePattern  implements GeneratorPdn {
         KeyStorePattern keyStorePattern = new KeyStorePattern();
         String[] items = line.split("[\\s_]]+");
 
-        if (items.length < 6) {
+        List<String> tmp = Arrays.asList(items);
+        LinkedList<String> lists = new LinkedList<String>(tmp);
+
+        if (lists.size() < 11) {
             throw new PatternPropertiesNumberNotEnough();
         }
 
-        if (!items[0].equals(keyStorePattern.getType())) {
+        if (!lists.pop().equals(keyStorePattern.getType())) {
             throw new WrongType();
         }
 
-        keyStorePattern.setGeneratorPd(items[1]);
-        keyStorePattern.setKeyStoreName(items[2]);
-        keyStorePattern.setKeyStorePd(items[3]);
-        keyStorePattern.setKeyLength(Integer.getInteger(items[4]));
-        keyStorePattern.setFcCountry(items[5]);
-        keyStorePattern.setFcProvince(items[6]);
-        keyStorePattern.setFcCity(items[7]);
-        keyStorePattern.setFcAlias(items[8]);
-        keyStorePattern.setFcPassword(items[9]);
-        keyStorePattern.setFcName(items[10]);
+        keyStorePattern.setGeneratorPd(lists.pop());
+        keyStorePattern.setKeyStoreName(lists.pop());
+        keyStorePattern.setKeyStorePd(lists.pop());
+        keyStorePattern.setKeyLength(Integer.getInteger(lists.pop()));
+        keyStorePattern.setFcCountry(lists.pop());
+        keyStorePattern.setFcProvince(lists.pop());
+        keyStorePattern.setFcCity(lists.pop());
+        keyStorePattern.setFcAlias(lists.pop());
+        keyStorePattern.setFcPassword(lists.pop());
+        keyStorePattern.setFcName(lists.pop());
 
         return keyStorePattern;
     }
