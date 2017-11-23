@@ -1,11 +1,13 @@
 package com.liumapp.pattern.doc;
 
+import com.liumapp.pattern.SocketPattern;
+
 /**
  * Created by liumapp on 11/20/17.
  * E-mail:liumapp.com@gmail.com
  * home-page:http://www.liumapp.com
  */
-public class FilePattern {
+public class FilePattern extends SocketPattern{
 
     /**
      * a:/usr/local/

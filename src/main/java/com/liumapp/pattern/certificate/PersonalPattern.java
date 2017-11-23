@@ -1,5 +1,6 @@
 package com.liumapp.pattern.certificate;
 
+import com.liumapp.pattern.SocketPattern;
 import com.liumapp.pattern.exception.PatternPropertiesNumberNotEnough;
 
 /**
@@ -7,7 +8,7 @@ import com.liumapp.pattern.exception.PatternPropertiesNumberNotEnough;
  * E-mail:liumapp.com@gmail.com
  * home-page:http://www.liumapp.com
  */
-public class PersonalPattern {
+public class PersonalPattern extends SocketPattern{
 
     /**
      * 别名
