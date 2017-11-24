@@ -1,10 +1,10 @@
 package com.liumapp.pattern.keystore;
 
+import com.liumapp.pattern.encode.EncodingBack;
 import com.liumapp.pattern.exception.PatternPropertiesNumberNotEnough;
 import com.liumapp.pattern.exception.WrongType;
 import com.liumapp.pattern.security.GeneratorPdn;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,9 +14,9 @@ import java.util.List;
  * E-mail:liumapp.com@gmail.com
  * home-page:http://www.liumapp.com
  */
-public class KeyStorePattern  implements GeneratorPdn {
+public class KeyStorePattern  implements GeneratorPdn , EncodingBack {
 
-    private String type = "keyStore";
+    private String type = "keyStoreGenerate";
 
     private String keyStoreName;
 
@@ -86,6 +86,12 @@ public class KeyStorePattern  implements GeneratorPdn {
         keyStorePattern.setFcName(lists.pop());
 
         return keyStorePattern;
+    }
+
+    @Override
+    public String encoding () {
+        
+        return "success";
     }
 
     public String getKeyStoreName() {
