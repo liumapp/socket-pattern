@@ -1,5 +1,6 @@
 package com.liumapp.pattern.certificate;
 
+import com.liumapp.pattern.encode.EncodingBack;
 import com.liumapp.pattern.exception.PatternPropertiesNumberNotEnough;
 import com.liumapp.pattern.exception.WrongType;
 
@@ -10,7 +11,7 @@ import java.util.*;
  * E-mail:liumapp.com@gmail.com
  * home-page:http://www.liumapp.com
  */
-public class PersonalPattern {
+public class PersonalPattern implements EncodingBack {
 
     private String type = "generatePersonalCert";
 
@@ -291,4 +292,54 @@ public class PersonalPattern {
         this.country = country;
     }
 
+    public void setImportant (String keystore, String storepass, String alias, String certPassword, String name, String identityCode,  String sex, String country, String province, String city) {
+        this.alias = alias;
+        this.certPassword = certPassword;
+        this.keystore = keystore;
+        this.storepass = storepass;
+        this.identityCode = identityCode;
+        this.name = name;
+        this.province = province;
+        this.city = city;
+        this.country = country;
+        this.sex = sex;
+    }
+
+    @Override
+    public String getEncoding() {
+        LinkedList<String> lists = new LinkedList<String>();
+        String result = "";
+
+        lists.add(type);
+        lists.add(keystore);
+        lists.add(alias);
+        lists.add(certPassword);
+        lists.add(name);
+        lists.add(identityCode);
+        lists.add(sex);
+        lists.add(country);
+        lists.add(province);
+        lists.add(city);
+
+        while (lists.size() > 1) {
+            result += lists.pop() + "_";
+        }
+        result += lists.pop();
+
+        return result;
+    }
+
+    @Override
+    public boolean chk() {
+        return !(type == null ||
+                keystore == null ||
+                alias == null ||
+                certPassword == null ||
+                name == null ||
+                identityCode == null ||
+                sex == null ||
+                country == null ||
+                province == null ||
+                city == null);
+    }
 }

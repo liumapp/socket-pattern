@@ -54,6 +54,22 @@ public class KeyStorePattern  implements GeneratorPdn , EncodingBack {
         return type;
     }
 
+    public KeyStorePattern() {
+    }
+
+    public void setImportant(String keyStoreName, String generatorPd, String keyStorePd, Integer keyLength, String fcName, String fcProvince, String fcCity, String fcCountry, String fcAlias, String fcPassword) {
+        this.keyStoreName = keyStoreName;
+        this.generatorPd = generatorPd;
+        this.keyStorePd = keyStorePd;
+        this.keyLength = keyLength;
+        this.fcName = fcName;
+        this.fcProvince = fcProvince;
+        this.fcCity = fcCity;
+        this.fcCountry = fcCountry;
+        this.fcAlias = fcAlias;
+        this.fcPassword = fcPassword;
+    }
+
     /**
      * 为保证alias的唯一性，alias建议使用身份证号码做标识
      * keyStore_generatorPd_liumapp.ks_keyStorePd_2048_country_province_city_alias_certPd_fcName
@@ -61,7 +77,7 @@ public class KeyStorePattern  implements GeneratorPdn , EncodingBack {
      */
     public static KeyStorePattern parse(String line) throws PatternPropertiesNumberNotEnough , WrongType {
         KeyStorePattern keyStorePattern = new KeyStorePattern();
-        String[] items = line.split("[\\s_]]+");
+        String[] items = line.split("[\\s_]+");
 
         List<String> tmp = Arrays.asList(items);
         LinkedList<String> lists = new LinkedList<String>(tmp);
@@ -93,21 +109,22 @@ public class KeyStorePattern  implements GeneratorPdn , EncodingBack {
         LinkedList<String> lists = new LinkedList<>();
         String result = "";
 
-        lists.push(type);
-        lists.push(generatorPd);
-        lists.push(keyStoreName);
-        lists.push(keyStorePd);
-        lists.push(keyLength.toString());
-        lists.push(fcCountry);
-        lists.push(fcProvince);
-        lists.push(fcCity);
-        lists.push(fcAlias);
-        lists.push(fcPassword);
-        lists.push(fcName);
+        lists.add(type);
+        lists.add(generatorPd);
+        lists.add(keyStoreName);
+        lists.add(keyStorePd);
+        lists.add(keyLength.toString());
+        lists.add(fcCountry);
+        lists.add(fcProvince);
+        lists.add(fcCity);
+        lists.add(fcAlias);
+        lists.add(fcPassword);
+        lists.add(fcName);
 
         while(lists.size() > 1) {
             result += lists.pop() + "_";
         }
+
         result += lists.pop();
         return result;
     }

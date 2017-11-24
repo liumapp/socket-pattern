@@ -1,5 +1,6 @@
 package com.liumapp.pattern.certificate;
 
+import com.liumapp.pattern.encode.EncodingBack;
 import com.liumapp.pattern.exception.PatternPropertiesNumberNotEnough;
 import com.liumapp.pattern.exception.WrongType;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * E-mail:liumapp.com@gmail.com
  * home-page:http://www.liumapp.com
  */
-public class ExporterPattern {
+public class ExporterPattern implements EncodingBack {
 
     private String type = "exportCert";
 
@@ -58,6 +59,46 @@ public class ExporterPattern {
         exporterPattern.setFileName(lists.pop());
 
         return exporterPattern;
+    }
+
+    public void setImportant (String keyStore, String keyStorePd, String alias, String certPd, String savePath, String fileName) {
+        this.keyStore = keyStore;
+        this.keyStorePd = keyStorePd;
+        this.alias = alias;
+        this.certPd = certPd;
+        this.savePath = savePath;
+        this.fileName = fileName;
+    }
+
+    @Override
+    public String getEncoding() {
+        LinkedList<String> lists = new LinkedList<String>();
+        String result = "";
+
+        lists.add(type);
+        lists.add(keyStore);
+        lists.add(keyStorePd);
+        lists.add(alias);
+        lists.add(certPd);
+        lists.add(savePath);
+        lists.add(fileName);
+
+        while(lists.size() > 1) {
+            result += lists.pop() + "_";
+        }
+        result += lists.pop();
+        return result;
+    }
+
+    @Override
+    public boolean chk() {
+        return !(type == null ||
+                keyStore == null ||
+                keyStorePd == null ||
+                alias == null ||
+                certPd == null ||
+                savePath == null ||
+                fileName == null);
     }
 
     public String getType() {
@@ -111,4 +152,5 @@ public class ExporterPattern {
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
+
 }
