@@ -89,9 +89,47 @@ public class KeyStorePattern  implements GeneratorPdn , EncodingBack {
     }
 
     @Override
-    public String encoding () {
-        
-        return "success";
+    public String getEncoding () {
+        LinkedList<String> lists = new LinkedList<>();
+        String result = "";
+
+        lists.push(type);
+        lists.push(generatorPd);
+        lists.push(keyStoreName);
+        lists.push(keyStorePd);
+        lists.push(keyLength.toString());
+        lists.push(fcCountry);
+        lists.push(fcProvince);
+        lists.push(fcCity);
+        lists.push(fcAlias);
+        lists.push(fcPassword);
+        lists.push(fcName);
+
+        while(lists.size() > 1) {
+            result += lists.pop() + "_";
+        }
+        result += lists.pop();
+        return result;
+    }
+
+    /**
+     * 检查所有必须参数是否都具备
+     * 都具备返回true
+     * 否则返回false
+     * @return boolean
+     */
+    @Override
+    public boolean chk() {
+        return !(type == null ||
+                generatorPd == null ||
+                keyStoreName == null ||
+                keyStorePd == null ||
+                keyLength == null ||
+                fcCountry == null ||
+                fcCity == null ||
+                fcAlias == null ||
+                fcPassword == null ||
+                fcName == null );
     }
 
     public String getKeyStoreName() {
@@ -175,4 +213,5 @@ public class KeyStorePattern  implements GeneratorPdn , EncodingBack {
     public void setGeneratorPd(String generatorPd) {
         this.generatorPd = generatorPd;
     }
+
 }

@@ -7,6 +7,11 @@ package com.liumapp.pattern.encode;
  */
 public interface EncodingBack {
 
-    public String encoding ();
+    public String getEncoding ();
 
+    /**
+     * 检查所有的参数是否都具备
+     * @return boolean
+     */
+    public boolean chk ();
 }
