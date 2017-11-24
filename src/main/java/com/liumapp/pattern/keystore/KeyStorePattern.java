@@ -93,7 +93,7 @@ public class KeyStorePattern  implements GeneratorPdn , EncodingBack {
         keyStorePattern.setGeneratorPd(lists.pop());
         keyStorePattern.setKeyStoreName(lists.pop());
         keyStorePattern.setKeyStorePd(lists.pop());
-        keyStorePattern.setKeyLength(Integer.getInteger(lists.pop()));
+        keyStorePattern.setKeyLength(Integer.parseInt(lists.pop()));
         keyStorePattern.setFcCountry(lists.pop());
         keyStorePattern.setFcProvince(lists.pop());
         keyStorePattern.setFcCity(lists.pop());
