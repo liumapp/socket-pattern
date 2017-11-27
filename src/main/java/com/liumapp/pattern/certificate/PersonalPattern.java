@@ -312,6 +312,7 @@ public class PersonalPattern implements EncodingBack {
 
         lists.add(type);
         lists.add(keystore);
+        lists.add(storepass);
         lists.add(alias);
         lists.add(certPassword);
         lists.add(name);
@@ -333,6 +334,7 @@ public class PersonalPattern implements EncodingBack {
     public boolean chk() {
         return !(type == null ||
                 keystore == null ||
+                storepass == null ||
                 alias == null ||
                 certPassword == null ||
                 name == null ||
