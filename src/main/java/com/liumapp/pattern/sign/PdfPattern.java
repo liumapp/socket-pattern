@@ -38,13 +38,20 @@ public class PdfPattern implements EncodingBack {
         List<String> tmp = Arrays.asList(items);
         LinkedList<String> lists = new LinkedList<String>(tmp);
 
-        if (lists.size() < 11) {
+        if (lists.size() < 7) {
             throw new PatternPropertiesNumberNotEnough();
         }
 
         if (!lists.pop().equals(pdfPattern.getType())) {
             throw new WrongType();
         }
+
+        pdfPattern.setCertFile(lists.pop());
+        pdfPattern.setLeftTopX(new BigDecimal(lists.pop()));
+        pdfPattern.setLeftTopY(new BigDecimal(lists.pop()));
+        pdfPattern.setWidth(new BigDecimal(lists.pop()));
+        pdfPattern.setHeight(new BigDecimal(lists.pop()));
+        pdfPattern.setSignImagePath(lists.pop());
 
         return pdfPattern;
     }
