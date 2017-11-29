@@ -3,7 +3,6 @@ package com.liumapp.pattern.sign;
 import com.liumapp.pattern.encode.EncodingBack;
 import com.liumapp.pattern.exception.PatternPropertiesNumberNotEnough;
 import com.liumapp.pattern.exception.WrongType;
-import com.liumapp.pattern.keystore.KeyStorePattern;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -31,6 +30,10 @@ public class PdfPattern implements EncodingBack {
 
     private String signImagePath;
 
+    private Integer pageNumber;
+
+    private String identityCode;
+
     public static PdfPattern parse(String line) throws PatternPropertiesNumberNotEnough, WrongType {
         PdfPattern pdfPattern = new PdfPattern();
         String[] items = line.split("[\\s_]+");
@@ -38,7 +41,7 @@ public class PdfPattern implements EncodingBack {
         List<String> tmp = Arrays.asList(items);
         LinkedList<String> lists = new LinkedList<String>(tmp);
 
-        if (lists.size() < 7) {
+        if (lists.size() < 9) {
             throw new PatternPropertiesNumberNotEnough();
         }
 
@@ -52,17 +55,21 @@ public class PdfPattern implements EncodingBack {
         pdfPattern.setWidth(new BigDecimal(lists.pop()));
         pdfPattern.setHeight(new BigDecimal(lists.pop()));
         pdfPattern.setSignImagePath(lists.pop());
+        pdfPattern.setPageNumber(Integer.valueOf(lists.pop()));
+        pdfPattern.setIdentityCode(lists.pop());
 
         return pdfPattern;
     }
 
-    public void setImportant(String certFile, BigDecimal leftTopX, BigDecimal leftTopY, BigDecimal width, BigDecimal height, String signImagePath) {
+    public void setImportant(String certFile, BigDecimal leftTopX, BigDecimal leftTopY, BigDecimal width, BigDecimal height, String signImagePath , Integer pageNumber , String identityCode) {
         this.certFile = certFile;
         this.leftTopX = leftTopX;
         this.leftTopY = leftTopY;
         this.width = width;
         this.height = height;
         this.signImagePath = signImagePath;
+        this.pageNumber = pageNumber;
+        this.identityCode = identityCode;
     }
 
     @Override
@@ -77,6 +84,8 @@ public class PdfPattern implements EncodingBack {
         lists.add(width.setScale(2 , BigDecimal.ROUND_HALF_UP).toString());
         lists.add(height.setScale(2 , BigDecimal.ROUND_HALF_UP).toString());
         lists.add(signImagePath);
+        lists.add(pageNumber.toString());
+        lists.add(identityCode);
 
         while (lists.size() > 1) {
             result += lists.pop() + "_";
@@ -93,7 +102,9 @@ public class PdfPattern implements EncodingBack {
                 this.leftTopY == null ||
                 this.width == null ||
                 this.height == null ||
-                this.signImagePath == null);
+                this.signImagePath == null ||
+                this.pageNumber == null ||
+                this.identityCode == null);
     }
 
     public String getType() {
@@ -150,5 +161,21 @@ public class PdfPattern implements EncodingBack {
 
     public void setSignImagePath(String signImagePath) {
         this.signImagePath = signImagePath;
+    }
+
+    public Integer getPageNumber() {
+        return pageNumber;
+    }
+
+    public void setPageNumber(Integer pageNumber) {
+        this.pageNumber = pageNumber;
+    }
+
+    public String getIdentityCode() {
+        return identityCode;
+    }
+
+    public void setIdentityCode(String identityCode) {
+        this.identityCode = identityCode;
     }
 }
