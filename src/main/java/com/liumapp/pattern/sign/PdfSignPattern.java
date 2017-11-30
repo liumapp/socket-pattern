@@ -14,7 +14,7 @@ import java.util.List;
  * E-mail:liumapp.com@gmail.com
  * home-page:http://www.liumapp.com
  */
-public class PdfPattern implements EncodingBack {
+public class PdfSignPattern implements EncodingBack {
 
     private String type = "signPdf";
 
@@ -34,8 +34,8 @@ public class PdfPattern implements EncodingBack {
 
     private String identityCode;
 
-    public static PdfPattern parse(String line) throws PatternPropertiesNumberNotEnough, WrongType {
-        PdfPattern pdfPattern = new PdfPattern();
+    public static PdfSignPattern parse(String line) throws PatternPropertiesNumberNotEnough, WrongType {
+        PdfSignPattern pdfPattern = new PdfSignPattern();
         String[] items = line.split("[\\s_]+");
 
         List<String> tmp = Arrays.asList(items);

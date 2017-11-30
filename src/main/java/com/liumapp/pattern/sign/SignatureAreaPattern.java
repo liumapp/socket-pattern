@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * 默认从OSS中获取文件
  * Created by liumapp on 11/29/17.
  * E-mail:liumapp.com@gmail.com
  * home-page:http://www.liumapp.com
@@ -18,6 +19,9 @@ public class SignatureAreaPattern implements EncodingBack {
 
     private String type = "addSignatureArea";
 
+    /**
+     * signature的name
+     */
     private String name;
 
     private BigDecimal firstX;
@@ -28,6 +32,10 @@ public class SignatureAreaPattern implements EncodingBack {
 
     private BigDecimal secondY;
 
+    private String fileKey;
+
+    private Integer pageNumber;
+
     public static SignatureAreaPattern parse (String line) throws PatternPropertiesNumberNotEnough, WrongType {
         SignatureAreaPattern signatureAreaPattern = new SignatureAreaPattern();
         String[] items = line.split("[\\s_]+");
@@ -35,7 +43,7 @@ public class SignatureAreaPattern implements EncodingBack {
         List<String> tmp = Arrays.asList(items);
         LinkedList<String> lists = new LinkedList<String>(tmp);
 
-        if (lists.size() < 6) {
+        if (lists.size() < 8) {
             throw new PatternPropertiesNumberNotEnough();
         }
 
@@ -48,16 +56,20 @@ public class SignatureAreaPattern implements EncodingBack {
         signatureAreaPattern.setFirstY(new BigDecimal(lists.pop()));
         signatureAreaPattern.setSecondX(new BigDecimal(lists.pop()));
         signatureAreaPattern.setSecondY(new BigDecimal(lists.pop()));
+        signatureAreaPattern.setFileKey(lists.pop());
+        signatureAreaPattern.setPageNumber(Integer.valueOf(lists.pop()));
 
         return signatureAreaPattern;
     }
 
-    public void setImportant(String name, BigDecimal firstX, BigDecimal firstY, BigDecimal secondX, BigDecimal secondY) {
+    public void setImportant(String name, BigDecimal firstX, BigDecimal firstY, BigDecimal secondX, BigDecimal secondY, String fileKey , Integer pageNumber) {
         this.name = name;
         this.firstX = firstX;
         this.firstY = firstY;
         this.secondX = secondX;
         this.secondY = secondY;
+        this.fileKey = fileKey;
+        this.pageNumber = pageNumber;
     }
 
     @Override
@@ -71,6 +83,8 @@ public class SignatureAreaPattern implements EncodingBack {
         lists.add(firstY.setScale(2 , BigDecimal.ROUND_HALF_UP).toString());
         lists.add(secondX.setScale(2 , BigDecimal.ROUND_HALF_UP).toString());
         lists.add(secondY.setScale(2 , BigDecimal.ROUND_HALF_UP).toString());
+        lists.add(fileKey);
+        lists.add(pageNumber.toString());
 
         while (lists.size() > 1) {
             result += lists.pop() + "_";
@@ -86,7 +100,9 @@ public class SignatureAreaPattern implements EncodingBack {
                 this.firstX == null ||
                 this.firstY == null ||
                 this.secondX == null ||
-                this.secondY == null);
+                this.secondY == null ||
+                this.fileKey == null ||
+                this.pageNumber == null);
     }
 
     public String getType() {
@@ -131,5 +147,21 @@ public class SignatureAreaPattern implements EncodingBack {
 
     public void setSecondY(BigDecimal secondY) {
         this.secondY = secondY;
+    }
+
+    public String getFileKey() {
+        return fileKey;
+    }
+
+    public void setFileKey(String fileKey) {
+        this.fileKey = fileKey;
+    }
+
+    public Integer getPageNumber() {
+        return pageNumber;
+    }
+
+    public void setPageNumber(Integer pageNumber) {
+        this.pageNumber = pageNumber;
     }
 }
