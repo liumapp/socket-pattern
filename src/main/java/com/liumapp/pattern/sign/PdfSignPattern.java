@@ -37,6 +37,10 @@ public class PdfSignPattern implements EncodingBack {
 
     private String signatureField;
 
+    private String tmpImg;
+
+    private String tmpPdf;
+
     public static PdfSignPattern parse(String line) throws PatternPropertiesNumberNotEnough, WrongType {
         PdfSignPattern pdfPattern = new PdfSignPattern();
         String[] items = line.split("[\\s_]+");
@@ -44,7 +48,7 @@ public class PdfSignPattern implements EncodingBack {
         List<String> tmp = Arrays.asList(items);
         LinkedList<String> lists = new LinkedList<String>(tmp);
 
-        if (lists.size() < 6) {
+        if (lists.size() < 8) {
             throw new PatternPropertiesNumberNotEnough();
         }
 
@@ -57,6 +61,8 @@ public class PdfSignPattern implements EncodingBack {
         pdfPattern.setAlias(lists.pop());
         pdfPattern.setCertPd(lists.pop());
         pdfPattern.setSignatureField(lists.pop());
+        pdfPattern.setTmpImg(lists.pop());
+        pdfPattern.setTmpPdf(lists.pop());
 
         return pdfPattern;
     }
@@ -80,6 +86,8 @@ public class PdfSignPattern implements EncodingBack {
         lists.add(alias);
         lists.add(certPd);
         lists.add(signatureField);
+        lists.add(tmpImg);
+        lists.add(tmpPdf);
 
         while (lists.size() > 1) {
             result += lists.pop() + "_";
@@ -95,7 +103,9 @@ public class PdfSignPattern implements EncodingBack {
                 pdfKey == null ||
                 alias == null ||
                 certPd == null ||
-                signatureField == null);
+                signatureField == null ||
+                tmpImg == null ||
+                tmpPdf == null);
     }
 
     public String getType() {
@@ -140,6 +150,22 @@ public class PdfSignPattern implements EncodingBack {
 
     public void setSignatureField(String signatureField) {
         this.signatureField = signatureField;
+    }
+
+    public String getTmpImg() {
+        return tmpImg;
+    }
+
+    public void setTmpImg(String tmpImg) {
+        this.tmpImg = tmpImg;
+    }
+
+    public String getTmpPdf() {
+        return tmpPdf;
+    }
+
+    public void setTmpPdf(String tmpPdf) {
+        this.tmpPdf = tmpPdf;
     }
 }
 

@@ -36,6 +36,8 @@ public class SignatureAreaPattern implements EncodingBack {
 
     private Integer pageNumber;
 
+    private String tmpFile;
+
     public static SignatureAreaPattern parse (String line) throws PatternPropertiesNumberNotEnough, WrongType {
         SignatureAreaPattern signatureAreaPattern = new SignatureAreaPattern();
         String[] items = line.split("[\\s_]+");
@@ -43,7 +45,7 @@ public class SignatureAreaPattern implements EncodingBack {
         List<String> tmp = Arrays.asList(items);
         LinkedList<String> lists = new LinkedList<String>(tmp);
 
-        if (lists.size() < 8) {
+        if (lists.size() < 9) {
             throw new PatternPropertiesNumberNotEnough();
         }
 
@@ -58,6 +60,7 @@ public class SignatureAreaPattern implements EncodingBack {
         signatureAreaPattern.setSecondY(new BigDecimal(lists.pop()));
         signatureAreaPattern.setFileKey(lists.pop());
         signatureAreaPattern.setPageNumber(Integer.valueOf(lists.pop()));
+        signatureAreaPattern.setTmpFile(lists.pop());
 
         return signatureAreaPattern;
     }
@@ -85,6 +88,7 @@ public class SignatureAreaPattern implements EncodingBack {
         lists.add(secondY.setScale(2 , BigDecimal.ROUND_HALF_UP).toString());
         lists.add(fileKey);
         lists.add(pageNumber.toString());
+        lists.add(tmpFile);
 
         while (lists.size() > 1) {
             result += lists.pop() + "_";
@@ -102,7 +106,8 @@ public class SignatureAreaPattern implements EncodingBack {
                 this.secondX == null ||
                 this.secondY == null ||
                 this.fileKey == null ||
-                this.pageNumber == null);
+                this.pageNumber == null ||
+                this.tmpFile == null);
     }
 
     public String getType() {
@@ -163,5 +168,13 @@ public class SignatureAreaPattern implements EncodingBack {
 
     public void setPageNumber(Integer pageNumber) {
         this.pageNumber = pageNumber;
+    }
+
+    public String getTmpFile() {
+        return tmpFile;
+    }
+
+    public void setTmpFile(String tmpFile) {
+        this.tmpFile = tmpFile;
     }
 }
