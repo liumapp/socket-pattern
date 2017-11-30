@@ -18,21 +18,24 @@ public class PdfSignPattern implements EncodingBack {
 
     private String type = "signPdf";
 
-    private String certFile;
+    /**
+     * 签名图片在OSS上的key
+     */
+    private String imgKey;
 
-    private BigDecimal leftTopX;
+    /**
+     * PDF合同在OSS上的key
+     */
+    private String pdfKey;
 
-    private BigDecimal leftTopY;
+    /**
+     * 证书别名
+     */
+    private String alias;
 
-    private BigDecimal width;
+    private String certPd;
 
-    private BigDecimal height;
-
-    private String signImagePath;
-
-    private Integer pageNumber;
-
-    private String identityCode;
+    private String signatureField;
 
     public static PdfSignPattern parse(String line) throws PatternPropertiesNumberNotEnough, WrongType {
         PdfSignPattern pdfPattern = new PdfSignPattern();
@@ -41,7 +44,7 @@ public class PdfSignPattern implements EncodingBack {
         List<String> tmp = Arrays.asList(items);
         LinkedList<String> lists = new LinkedList<String>(tmp);
 
-        if (lists.size() < 9) {
+        if (lists.size() < 6) {
             throw new PatternPropertiesNumberNotEnough();
         }
 
@@ -49,27 +52,21 @@ public class PdfSignPattern implements EncodingBack {
             throw new WrongType();
         }
 
-        pdfPattern.setCertFile(lists.pop());
-        pdfPattern.setLeftTopX(new BigDecimal(lists.pop()));
-        pdfPattern.setLeftTopY(new BigDecimal(lists.pop()));
-        pdfPattern.setWidth(new BigDecimal(lists.pop()));
-        pdfPattern.setHeight(new BigDecimal(lists.pop()));
-        pdfPattern.setSignImagePath(lists.pop());
-        pdfPattern.setPageNumber(Integer.valueOf(lists.pop()));
-        pdfPattern.setIdentityCode(lists.pop());
+        pdfPattern.setImgKey(lists.pop());
+        pdfPattern.setPdfKey(lists.pop());
+        pdfPattern.setAlias(lists.pop());
+        pdfPattern.setCertPd(lists.pop());
+        pdfPattern.setSignatureField(lists.pop());
 
         return pdfPattern;
     }
 
-    public void setImportant(String certFile, BigDecimal leftTopX, BigDecimal leftTopY, BigDecimal width, BigDecimal height, String signImagePath , Integer pageNumber , String identityCode) {
-        this.certFile = certFile;
-        this.leftTopX = leftTopX;
-        this.leftTopY = leftTopY;
-        this.width = width;
-        this.height = height;
-        this.signImagePath = signImagePath;
-        this.pageNumber = pageNumber;
-        this.identityCode = identityCode;
+    public void setImportant(String imgKey, String pdfKey, String alias, String certPd, String signatureField) {
+        this.imgKey = imgKey;
+        this.pdfKey = pdfKey;
+        this.alias = alias;
+        this.certPd = certPd;
+        this.signatureField = signatureField;
     }
 
     @Override
@@ -78,14 +75,11 @@ public class PdfSignPattern implements EncodingBack {
         String result = "";
 
         lists.add(type);
-        lists.add(certFile);
-        lists.add(leftTopX.setScale(2 , BigDecimal.ROUND_HALF_UP).toString());
-        lists.add(leftTopY.setScale(2 , BigDecimal.ROUND_HALF_UP).toString());
-        lists.add(width.setScale(2 , BigDecimal.ROUND_HALF_UP).toString());
-        lists.add(height.setScale(2 , BigDecimal.ROUND_HALF_UP).toString());
-        lists.add(signImagePath);
-        lists.add(pageNumber.toString());
-        lists.add(identityCode);
+        lists.add(imgKey);
+        lists.add(pdfKey);
+        lists.add(alias);
+        lists.add(certPd);
+        lists.add(signatureField);
 
         while (lists.size() > 1) {
             result += lists.pop() + "_";
@@ -97,85 +91,55 @@ public class PdfSignPattern implements EncodingBack {
 
     @Override
     public boolean chk() {
-        return !(this.certFile == null ||
-                this.leftTopX == null ||
-                this.leftTopY == null ||
-                this.width == null ||
-                this.height == null ||
-                this.signImagePath == null ||
-                this.pageNumber == null ||
-                this.identityCode == null);
+        return !(imgKey == null ||
+                pdfKey == null ||
+                alias == null ||
+                certPd == null ||
+                signatureField == null);
     }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public String getImgKey() {
+        return imgKey;
     }
 
-    public String getCertFile() {
-        return certFile;
+    public void setImgKey(String imgKey) {
+        this.imgKey = imgKey;
     }
 
-    public void setCertFile(String certFile) {
-        this.certFile = certFile;
+    public String getPdfKey() {
+        return pdfKey;
     }
 
-    public BigDecimal getLeftTopX() {
-        return leftTopX;
+    public void setPdfKey(String pdfKey) {
+        this.pdfKey = pdfKey;
     }
 
-    public void setLeftTopX(BigDecimal leftTopX) {
-        this.leftTopX = leftTopX;
+    public String getAlias() {
+        return alias;
     }
 
-    public BigDecimal getLeftTopY() {
-        return leftTopY;
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 
-    public void setLeftTopY(BigDecimal leftTopY) {
-        this.leftTopY = leftTopY;
+    public String getCertPd() {
+        return certPd;
     }
 
-    public BigDecimal getWidth() {
-        return width;
+    public void setCertPd(String certPd) {
+        this.certPd = certPd;
     }
 
-    public void setWidth(BigDecimal width) {
-        this.width = width;
+    public String getSignatureField() {
+        return signatureField;
     }
 
-    public BigDecimal getHeight() {
-        return height;
-    }
-
-    public void setHeight(BigDecimal height) {
-        this.height = height;
-    }
-
-    public String getSignImagePath() {
-        return signImagePath;
-    }
-
-    public void setSignImagePath(String signImagePath) {
-        this.signImagePath = signImagePath;
-    }
-
-    public Integer getPageNumber() {
-        return pageNumber;
-    }
-
-    public void setPageNumber(Integer pageNumber) {
-        this.pageNumber = pageNumber;
-    }
-
-    public String getIdentityCode() {
-        return identityCode;
-    }
-
-    public void setIdentityCode(String identityCode) {
-        this.identityCode = identityCode;
+    public void setSignatureField(String signatureField) {
+        this.signatureField = signatureField;
     }
 }
+
