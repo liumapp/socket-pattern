@@ -20,6 +20,7 @@ public class SignatureAreaPattern implements EncodingBack {
     private String type = "addSignatureArea";
 
     /**
+     * 每个签署区域的name必须唯一
      * signature的name
      */
     private String name;
