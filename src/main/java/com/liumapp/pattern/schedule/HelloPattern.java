@@ -14,7 +14,7 @@ import java.util.List;
  * E-mail:liumapp.com@gmail.com
  * home-page:http://www.liumapp.com
  */
-public class HelloPattern extends Pattern implements EncodingBack{
+public class HelloPattern extends SchedulePattern implements EncodingBack{
 
     private String type = "helloSchedule";
 
@@ -26,7 +26,7 @@ public class HelloPattern extends Pattern implements EncodingBack{
 
     private Integer time;
 
-    private DateUnit.IntervalUnit Unit;
+    private IntervalUnit Unit;
 
     public String getType() {
         return type;
@@ -64,11 +64,11 @@ public class HelloPattern extends Pattern implements EncodingBack{
         this.time = time;
     }
 
-    public DateUnit.IntervalUnit getUnit() {
+    public IntervalUnit getUnit() {
         return Unit;
     }
 
-    public void setUnit(DateUnit.IntervalUnit unit) {
+    public void setUnit(IntervalUnit unit) {
         Unit = unit;
     }
 
@@ -89,12 +89,12 @@ public class HelloPattern extends Pattern implements EncodingBack{
 
         helloPattern.setMsg(list.pop());
         helloPattern.setTime(Integer.valueOf(list.pop()));
-        helloPattern.setUnit(DateUnit.IntervalUnit.valueOf(list.pop()));
+        helloPattern.setUnit(IntervalUnit.valueOf(list.pop()));
 
         return helloPattern;
     }
 
-    public void setImportant(String msg, Integer time, DateUnit.IntervalUnit unit) {
+    public void setImportant(String msg, Integer time, IntervalUnit unit) {
         this.msg = msg;
         this.time = time;
         Unit = unit;
