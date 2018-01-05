@@ -55,6 +55,22 @@ public class HelloPattern implements EncodingBack {
         this.msg = msg;
     }
 
+    public Integer getTime() {
+        return time;
+    }
+
+    public void setTime(Integer time) {
+        this.time = time;
+    }
+
+    public DateUnit.IntervalUnit getUnit() {
+        return Unit;
+    }
+
+    public void setUnit(DateUnit.IntervalUnit unit) {
+        Unit = unit;
+    }
+
     public static HelloPattern parse(String line) throws PatternPropertiesNumberNotEnough, WrongType {
         HelloPattern helloPattern = new HelloPattern();
 
@@ -62,7 +78,7 @@ public class HelloPattern implements EncodingBack {
         List<String> tmp = Arrays.asList(items);
         LinkedList<String> list = new LinkedList<String>(tmp);
 
-        if (list.size() < 2 ) {
+        if (list.size() < 4 ) {
             throw new PatternPropertiesNumberNotEnough();
         }
 
@@ -71,12 +87,16 @@ public class HelloPattern implements EncodingBack {
         }
 
         helloPattern.setMsg(list.pop());
+        helloPattern.setTime(Integer.valueOf(list.pop()));
+        helloPattern.setUnit(DateUnit.IntervalUnit.valueOf(list.pop()));
 
         return helloPattern;
     }
 
-    public void setImportant(String msg) {
+    public void setImportant(String msg, Integer time, DateUnit.IntervalUnit unit) {
         this.msg = msg;
+        this.time = time;
+        Unit = unit;
     }
 
     @Override
@@ -86,6 +106,8 @@ public class HelloPattern implements EncodingBack {
 
         list.add(type);
         list.add(msg);
+        list.add(String.valueOf(time));
+        list.add(String.valueOf(Unit));
 
         while(list.size() > 1) {
             result += list.pop() + "_";
@@ -98,6 +120,9 @@ public class HelloPattern implements EncodingBack {
 
     @Override
     public boolean chk() {
-        return !(this.type == null || this.msg == null);
+        return !(this.type == null
+                || this.msg == null
+                || this.time == null
+                || this.Unit == null);
     }
 }

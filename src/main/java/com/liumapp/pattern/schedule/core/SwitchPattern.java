@@ -62,6 +62,9 @@ public class SwitchPattern implements EncodingBack {
         LinkedList<String> list = new LinkedList<String>();
         String result = "";
 
+        list.add(type);
+        list.add(String.valueOf(order));
+
         while(list.size() > 1) {
             result += list.pop() + "_";
         }
