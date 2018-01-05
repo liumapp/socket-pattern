@@ -1,5 +1,6 @@
 package com.liumapp.pattern.schedule;
 
+import com.liumapp.pattern.Pattern;
 import com.liumapp.pattern.encode.EncodingBack;
 import com.liumapp.pattern.exception.PatternPropertiesNumberNotEnough;
 import com.liumapp.pattern.exception.WrongType;
@@ -13,7 +14,7 @@ import java.util.List;
  * E-mail:liumapp.com@gmail.com
  * home-page:http://www.liumapp.com
  */
-public class HelloPattern implements EncodingBack {
+public class HelloPattern extends Pattern implements EncodingBack{
 
     private String type = "helloSchedule";
 
