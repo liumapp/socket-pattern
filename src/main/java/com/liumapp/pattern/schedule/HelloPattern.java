@@ -4,7 +4,6 @@ import com.liumapp.pattern.encode.EncodingBack;
 import com.liumapp.pattern.exception.PatternPropertiesNumberNotEnough;
 import com.liumapp.pattern.exception.WrongType;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -23,6 +22,10 @@ public class HelloPattern implements EncodingBack {
     private String group;
 
     private String msg;
+
+    private Integer time;
+
+    private DateUnit.IntervalUnit Unit;
 
     public String getType() {
         return type;
