@@ -1,6 +1,5 @@
 package com.liumapp.pattern.schedule;
 
-import com.liumapp.pattern.Pattern;
 import com.liumapp.pattern.encode.EncodingBack;
 import com.liumapp.pattern.exception.PatternPropertiesNumberNotEnough;
 import com.liumapp.pattern.exception.WrongType;
@@ -20,6 +19,8 @@ public class HelloPattern extends SchedulePattern implements EncodingBack{
 
     private String name;
 
+    private String triggerName;
+
     private String group;
 
     private String msg;
@@ -38,6 +39,14 @@ public class HelloPattern extends SchedulePattern implements EncodingBack{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getTriggerName() {
+        return triggerName;
+    }
+
+    public void setTriggerName(String triggerName) {
+        this.triggerName = triggerName;
     }
 
     public String getGroup() {
@@ -83,7 +92,7 @@ public class HelloPattern extends SchedulePattern implements EncodingBack{
             throw new PatternPropertiesNumberNotEnough();
         }
 
-        if (list.pop().equals(helloPattern.getType())) {
+        if (!list.pop().equals(helloPattern.getType())) {
             throw new WrongType();
         }
 
