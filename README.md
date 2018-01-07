@@ -4,3 +4,6 @@
 ## 1.2.0 
 
 add pattern for schedule-manager
+
+
+这是一个DNSQueen的依赖项目，并没有很多的通用性
