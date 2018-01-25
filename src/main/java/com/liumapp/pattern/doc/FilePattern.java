@@ -26,7 +26,7 @@ public class FilePattern {
     private String type;
 
     /**
-     * which unit is byte
+     * which util is byte
      */
     private Long size;
 
