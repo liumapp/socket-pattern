@@ -19,7 +19,6 @@ public class SendEmailPattern implements EncodingBack {
 
     private String subject;           //邮件的主题
 
-
     @Override
     public String getEncoding() {
         LinkedList<Object> lists = new LinkedList<>();
@@ -46,14 +45,12 @@ public class SendEmailPattern implements EncodingBack {
                         subject == null
         );
     }
-
     public void sendEmailPattern(Integer code, List<String> emails, Object content, String subject) {
         this.code = code;
         this.emails = emails;
         this.content = content;
         this.subject = subject;
     }
-
 
     public static SendEmailPattern parse(String line) throws PatternPropertiesNumberNotEnough, WrongType {
         SendEmailPattern sendEmailPattern = new SendEmailPattern();
